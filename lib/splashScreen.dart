@@ -21,7 +21,7 @@ class _splashScreenState extends State<splashScreen> {
     Timer(const Duration(seconds: 8), () {
       Navigator.of(context)
       // TODO: if you need a load another screen change this
-          .pushReplacement(MaterialPageRoute(builder: (_) => const login()));
+          .pushReplacement(MaterialPageRoute(builder: (_) => login()));
     });
   }
 

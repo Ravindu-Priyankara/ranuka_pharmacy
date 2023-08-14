@@ -1,73 +1,134 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dashboard.dart';
-import 'package:ranuka_pharmacy/signup.dart';
-import 'package:animate_do/animate_do.dart';
+import 'package:ranuka_pharmacy/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ranuka_pharmacy/validator/form_validator.dart';
+import 'package:animate_do/animate_do.dart';
 
-
-
-class loginPage extends StatefulWidget {
-  const loginPage({Key? key}) : super(key: key);
+class signupPage extends StatefulWidget {
+  const signupPage({Key? key}) : super(key: key);
 
   @override
-  State<loginPage> createState() => _loginPageState();
+  State<signupPage> createState() => _signupPageState();
 }
 
-class _loginPageState extends State<loginPage> {
+class _signupPageState extends State<signupPage> {
 
-  ///login function
-  static Future<User?> loginusingEmailPassword({required String email, required String password, required BuildContext context}) async{
+  static Future<User?> signinusingEmailPassword({required String email, required String password,required String name, required BuildContext context}) async{
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
-    try{
-      UserCredential userCredential = await auth.signInWithEmailAndPassword(email: email, password: password);
-      user = userCredential.user;
-    } on FirebaseAuthException catch (e){
-      if(e.code == "user-not-found"){
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            backgroundColor: Colors.red,
-            elevation: 30,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(23),topRight: Radius.circular(23)),
-                side: BorderSide(
-                  width: 2,
-                  color: Colors.white,
-                )
-            ),
-            content: Center(
-              child: Text("Users not Found",
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                    shadows: [BoxShadow(
-                      color: Colors.black,
-                      blurRadius: 20,
-                      offset: Offset(1,10),
-                    )]
+    if(name.isNotEmpty){
+      try{
+        UserCredential userCredential = await auth.createUserWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+        user = userCredential.user;
+        await user!.updateDisplayName(name);
+        await user.reload();
+        user = auth.currentUser;
+      }on FirebaseAuthException catch (e){
+        if (e.code == 'weak-password') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              backgroundColor: Colors.red,
+              elevation: 30,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(23),topRight: Radius.circular(23)),
+                  side: BorderSide(
+                    width: 2,
+                    color: Colors.white,
+                  )
+              ),
+              content: Center(
+                child: Text("The provided password is too weak",
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      shadows: [BoxShadow(
+                        color: Colors.black,
+                        blurRadius: 20,
+                        offset: Offset(1,10),
+                      )]
+                  ),
                 ),
               ),
             ),
-          ),
-        );
+          );
+        } else if (e.code == 'email-already-in-use') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              backgroundColor: Colors.red,
+              elevation: 30,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(23),topRight: Radius.circular(23)),
+                  side: BorderSide(
+                    width: 2,
+                    color: Colors.white,
+                  )
+              ),
+              content: Center(
+                child: Text("The account already exists for that email.",
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      shadows: [BoxShadow(
+                        color: Colors.black,
+                        blurRadius: 20,
+                        offset: Offset(1,10),
+                      )]
+                  ),
+                ),
+              ),
+            ),
+          );
+        }
+      }catch(e){
+        print(e);
       }
+    }
+    else{
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.red,
+          elevation: 30,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(23),topRight: Radius.circular(23)),
+              side: BorderSide(
+                width: 2,
+                color: Colors.white,
+              )
+          ),
+          content: Center(
+            child: Text("Username can't be empty!",
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  shadows: [BoxShadow(
+                    color: Colors.black,
+                    blurRadius: 20,
+                    offset: Offset(1,10),
+                  )]
+              ),
+            ),
+          ),
+        ),
+      );
     }
     return user;
   }
+
   bool passwordVisible = false;
   @override
   Widget build(BuildContext context) {
-    ///create a text controllers
     TextEditingController _emailController = TextEditingController();
     TextEditingController _passwordController = TextEditingController();
-
+    TextEditingController _nameController = TextEditingController();
     return Scaffold(
-      /** stop bottom overlay issue **/
+      ///Bottom overlay issue fixed
       resizeToAvoidBottomInset: false,
-      /** App bar section **/
+      ///Add App bar
       appBar: AppBar(
         elevation: 0,
         systemOverlayStyle: SystemUiOverlayStyle.light,
@@ -79,7 +140,7 @@ class _loginPageState extends State<loginPage> {
           icon: const Icon(Icons.arrow_back_ios,size: 20,color: Colors.black),
         ),
       ),
-      /** Application body section **/
+      ///Add body section
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: double.infinity,
@@ -89,13 +150,12 @@ class _loginPageState extends State<loginPage> {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children:  <Widget>[
-                /** Header texts **/
                 FadeInDown(
                   delay: const Duration(
                     milliseconds: 500,
                   ),
                   child: const Text(
-                    "Login Panel",
+                    "Sign Up",
                     style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold
@@ -105,26 +165,50 @@ class _loginPageState extends State<loginPage> {
                 const SizedBox(height: 20,),
                 FadeInDown(
                   delay: const Duration(
-                    milliseconds: 1000,
+                    milliseconds: 800,
                   ),
                   child: Text(
-                    "Login to your account.",
+                    "Create an account.",
                     style: TextStyle(
                       fontSize: 15,
                       color: Colors.grey[700],
                     ),
                   ),
-                ),
+                )
               ],
             ),
-            /** Define input fields **/
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: Column(
                 children: <Widget>[
+                  FadeInLeft(
+                    delay: const Duration(
+                      milliseconds: 1000,
+                    ),
+                    child: TextFormField(
+                      controller: _nameController,
+                      validator: (value) => Validator.validateName(name: _nameController.text),
+                      style: const TextStyle(
+                        color: Colors.black,
+                      ),
+                      cursorColor: Colors.red,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Enter Your Name',
+                        contentPadding: EdgeInsets.all(25.0),
+                        isDense: true,                      // Added this
+                      ),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 12
+                    ),
+                  ),
                   FadeInRight(
                     delay: const Duration(
-                      milliseconds: 800,
+                      milliseconds: 1000,
                     ),
                     child: TextFormField(
                       controller: _emailController,
@@ -147,10 +231,9 @@ class _loginPageState extends State<loginPage> {
                         vertical: 12
                     ),
                   ),
-                  const SizedBox(height: 12,),
                   FadeInLeft(
                     delay: const Duration(
-                      milliseconds: 800,
+                      milliseconds: 1000,
                     ),
                     child: TextFormField(
                       controller: _passwordController,
@@ -201,49 +284,19 @@ class _loginPageState extends State<loginPage> {
                     right: BorderSide(color: Colors.black),
                   ),
                 ),
-                /** Define login button and text **/
                 child: FadeInUp(
                   delay: const Duration(
-                    milliseconds: 1000,
+                    milliseconds: 1500,
                   ),
                   child: MaterialButton(
                     minWidth: double.infinity,
                     height: 60,
-                    onPressed: () async{
-                      User? user = await loginusingEmailPassword(email: _emailController.text, password: _passwordController.text, context: context);
-                      if(user != null){
+                    onPressed: () async {
+                      User? user = await signinusingEmailPassword(email: _emailController.text, password: _passwordController.text,name: _nameController.text, context: context);
+                      if(user?.uid != null){
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            backgroundColor: const Color.fromRGBO(
-                                3, 37, 96, 1.0),
-                            elevation: 30,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(topLeft: Radius.circular(23),topRight: Radius.circular(23)),
-                                side: BorderSide(
-                                  width: 2,
-                                  color: Colors.lightGreenAccent,
-                                )
-                            ),
-                            content: Center(
-                              child: Text("${_emailController.text}\t login successfully.",
-                                style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                    shadows: [BoxShadow(
-                                      color: Colors.black,
-                                      blurRadius: 20,
-                                      offset: Offset(1,10),
-                                    )]
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>const dashboard()));
-                      }else if(user == null){
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            backgroundColor: Colors.red,
+                            backgroundColor: Colors.blue,
                             elevation: 30,
                             shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.only(topLeft: Radius.circular(23),topRight: Radius.circular(23)),
@@ -253,7 +306,7 @@ class _loginPageState extends State<loginPage> {
                                 )
                             ),
                             content: Center(
-                              child: Text("${_emailController.text}\t login  successful!",
+                              child: Text("${_nameController.text}\t registered successfully.",
                                 style: const TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.w600,
@@ -270,10 +323,34 @@ class _loginPageState extends State<loginPage> {
                               onPressed: (){},
                             ),
                           ),
+
                         );
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context)=> const dashboard(),
+                      }
+                      else{
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: Colors.red,
+                            elevation: 30,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(topLeft: Radius.circular(23),topRight: Radius.circular(23)),
+                                side: BorderSide(
+                                  width: 1,
+                                  color: Colors.black87,
+                                )
+                            ),
+                            content: Center(
+                              child: Text("${_nameController.text}\t register not successful.",
+                                style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                    shadows: [BoxShadow(
+                                      color: Colors.black87,
+                                      blurRadius: 20,
+                                      offset: Offset(1,10),
+                                    )]
+                                ),
+                              ),
+                            ),
                           ),
                         );
                       }
@@ -283,7 +360,7 @@ class _loginPageState extends State<loginPage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50),
                     ),
-                    child: const Text("Login",
+                    child: const Text("sign up",
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 18,
@@ -295,31 +372,29 @@ class _loginPageState extends State<loginPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children:  <Widget>[
-                /** Bottom text and text button **/
                 FadeInLeft(
                   delay: const Duration(
-                    milliseconds: 1300,
+                    milliseconds: 1600,
                   ),
-                  child: const Text("don't have an account?"),
+                  child: const Text("Already have an account?"
+                  ),
                 ),
                 FadeInUp(
                   delay: const Duration(
-                    milliseconds: 1500,
+                    milliseconds: 1800,
                   ),
                   child: TextButton(
                       onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => signup()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => login()));
                       },
-                      child: const Text("Sign Up",
+                      child: const Text("Login",
                         style: TextStyle(
                           fontWeight: FontWeight.w600,fontSize: 18,
                         ),
-                      )
-                  ),
+                      )),
                 ),
               ],
             ),
-            /** Bottom Image **/
             FadeInRightBig(
               delay: const Duration(
                 milliseconds: 2000,
@@ -341,13 +416,13 @@ class _loginPageState extends State<loginPage> {
   }
 }
 
-class login extends StatefulWidget {
+class signup extends StatefulWidget {
 
   @override
-  State<login> createState() => _loginState();
+  State<signup> createState() => _signupState();
 }
 
-class _loginState extends State<login> {
+class _signupState extends State<signup> {
   Future<FirebaseApp> _initializeFirebase() async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
     return firebaseApp;
@@ -359,7 +434,7 @@ class _loginState extends State<login> {
           future: _initializeFirebase(),
           builder: (context,snapshot){
             if(snapshot.connectionState == ConnectionState.done){
-              return const loginPage();
+              return const signupPage();
             }
             return const Center(
               child: CircularProgressIndicator(),
