@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:ranuka_pharmacy/login.dart';
 
 class splashScreen extends StatefulWidget {
   const splashScreen({Key? key}) : super(key: key);
@@ -18,9 +19,9 @@ class _splashScreenState extends State<splashScreen> {
     super.initState();
     ///set time for showing splash screen
     Timer(const Duration(seconds: 8), () {
-      //Navigator.of(context)
+      Navigator.of(context)
       // TODO: if you need a load another screen change this
-          //.pushReplacement(MaterialPageRoute(builder: (_) => const HomePage()));
+          .pushReplacement(MaterialPageRoute(builder: (_) => const login()));
     });
   }
 

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>559107254787-bgup9ec4mab8elgv1k1hcpo6uk6ld5hu.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.559107254787-bgup9ec4mab8elgv1k1hcpo6uk6ld5hu</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDYNngzOj5fz4_0tWRErdELVVQRFvtwwks</string>
+	<key>GCM_SENDER_ID</key>
+	<string>559107254787</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.ranukaPharmacy</string>
+	<key>PROJECT_ID</key>
+	<string>ranuka-pharmacy</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ranuka-pharmacy.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:559107254787:ios:576751945af85258223c36</string>
+</dict>
+</plist>
