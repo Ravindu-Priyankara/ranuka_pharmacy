@@ -1,5 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:ranuka_pharmacy/chan.dart';
+import 'package:ranuka_pharmacy/emergency.dart';
+import 'package:ranuka_pharmacy/order.dart';
 
 class dashboard extends StatefulWidget {
   const dashboard({Key? key}) : super(key: key);
@@ -48,169 +51,94 @@ class _dashboardState extends State<dashboard> {
                 Row(
                   children: [
                     const SizedBox(width: 20,),
-                    Container(
-                      width: 180,
-                      height: 200,
-                      decoration: BoxDecoration(
-                        color: Colors.lightGreenAccent,
-                        border: Border.all(
-                          color: Colors.black,
-                        ),
-                        borderRadius: const BorderRadius.all(Radius.circular(20)),
-                      ),
-                      child: Column(
-                        children: const[
-                          CircleAvatar(
-                            radius: 60,
-                            backgroundColor: Colors.white,
-                            foregroundImage: AssetImage("assets/tablets.jpg"),
-                          ),
-                          SizedBox(height: 10,),
-                          Text("Tablets",
-                            style: TextStyle(
-                              fontSize: 23,
-                              fontWeight: FontWeight.w600,
+                    InkWell(
+                      child: Container(
+                          width: 180,
+                          height: 200,
+                          decoration: BoxDecoration(
+                            color: Colors.lightGreenAccent,
+                            border: Border.all(
                               color: Colors.black,
-                              shadows: [BoxShadow(
-                                color: Colors.white,
-                                offset: Offset(2, 2),
-                                blurRadius: 2,
-                              ),
-                              BoxShadow(
-                                color: Colors.black45,
-                                offset: Offset(5, 9),
-                                blurRadius: 12,
-                              ),
-                              ]
                             ),
+                            borderRadius: const BorderRadius.all(Radius.circular(20)),
                           ),
-                        ],
-                      )
+                          child: Column(
+                            children: const[
+                              CircleAvatar(
+                                radius: 60,
+                                backgroundColor: Colors.white,
+                                foregroundImage: AssetImage("assets/tablets.jpg"),
+                              ),
+                              SizedBox(height: 10,),
+                              Text("Tablets",
+                                style: TextStyle(
+                                    fontSize: 23,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black,
+                                    shadows: [BoxShadow(
+                                      color: Colors.white,
+                                      offset: Offset(2, 2),
+                                      blurRadius: 2,
+                                    ),
+                                      BoxShadow(
+                                        color: Colors.black45,
+                                        offset: Offset(5, 9),
+                                        blurRadius: 12,
+                                      ),
+                                    ]
+                                ),
+                              ),
+                            ],
+                          )
+                      ),
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const order()));
+                      },
                     ),
                     const SizedBox(width: 20,),
-                    Container(
-                      width: 180,
-                      height: 200,
-                      decoration: BoxDecoration(
-                        color: Colors.lightGreenAccent,
-                        border: Border.all(
-                          color: Colors.black,
+                    InkWell(
+                      child: Container(
+                        width: 180,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          color: Colors.lightGreenAccent,
+                          border: Border.all(
+                            color: Colors.black,
+                          ),
+                          borderRadius: const BorderRadius.all(Radius.circular(20)),
                         ),
-                        borderRadius: const BorderRadius.all(Radius.circular(20)),
-                      ),
-                        child: Column(
-                          children: const[
-                            CircleAvatar(
-                              radius: 60,
-                              backgroundColor: Colors.white,
-                              foregroundImage: AssetImage("assets/injections.jpg"),
-                            ),
-                            SizedBox(height: 10,),
-                            Text("Injections",
-                              style: TextStyle(
-                                  fontSize: 23,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
-                                  shadows: [BoxShadow(
-                                    color: Colors.white,
-                                    offset: Offset(2, 2),
-                                    blurRadius: 2,
-                                  ),
-                                    BoxShadow(
-                                      color: Colors.black45,
-                                      offset: Offset(5, 9),
-                                      blurRadius: 12,
-                                    ),
-                                  ]
+                          child: Column(
+                            children: const[
+                              CircleAvatar(
+                                radius: 60,
+                                backgroundColor: Colors.white,
+                                foregroundImage: AssetImage("assets/injections.jpg"),
                               ),
-                            ),
-                          ],
-                        )
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20,),
-                Row(
-                  children: [
-                    const SizedBox(width: 20,),
-                    Container(
-                      width: 180,
-                      height: 200,
-                      decoration: BoxDecoration(
-                        color: Colors.lightGreenAccent,
-                        border: Border.all(
-                          color: Colors.black,
-                        ),
-                        borderRadius: const BorderRadius.all(Radius.circular(20)),
-                      ),
-                        child: Column(
-                          children: const[
-                            CircleAvatar(
-                              radius: 60,
-                              backgroundColor: Colors.white,
-                              foregroundImage: AssetImage("assets/child.jpg"),
-                            ),
-                            SizedBox(height: 10,),
-                            Text("Child",
-                              style: TextStyle(
-                                  fontSize: 23,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
-                                  shadows: [BoxShadow(
-                                    color: Colors.white,
-                                    offset: Offset(2, 2),
-                                    blurRadius: 2,
-                                  ),
-                                    BoxShadow(
-                                      color: Colors.black45,
-                                      offset: Offset(5, 9),
-                                      blurRadius: 12,
+                              SizedBox(height: 10,),
+                              Text("Injections",
+                                style: TextStyle(
+                                    fontSize: 23,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black,
+                                    shadows: [BoxShadow(
+                                      color: Colors.white,
+                                      offset: Offset(2, 2),
+                                      blurRadius: 2,
                                     ),
-                                  ]
+                                      BoxShadow(
+                                        color: Colors.black45,
+                                        offset: Offset(5, 9),
+                                        blurRadius: 12,
+                                      ),
+                                    ]
+                                ),
                               ),
-                            ),
-                          ],
-                        )
-                    ),
-                    const SizedBox(width: 20,),
-                    Container(
-                      width: 180,
-                      height: 200,
-                      decoration: BoxDecoration(
-                        color: Colors.lightGreenAccent,
-                        border: Border.all(
-                          color: Colors.black,
-                        ),
-                        borderRadius: const BorderRadius.all(Radius.circular(20)),
+                            ],
+                          )
                       ),
-                        child: Column(
-                          children: const[
-                            CircleAvatar(
-                              radius: 60,
-                              backgroundColor: Colors.white,
-                              foregroundImage: AssetImage("assets/syrup.jpg"),
-                            ),
-                            SizedBox(height: 10,),
-                            Text("Syrups",
-                              style: TextStyle(
-                                  fontSize: 23,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
-                                  shadows: [BoxShadow(
-                                    color: Colors.white,
-                                    offset: Offset(2, 2),
-                                    blurRadius: 2,
-                                  ),
-                                    BoxShadow(
-                                      color: Colors.black45,
-                                      offset: Offset(5, 9),
-                                      blurRadius: 12,
-                                    ),
-                                  ]
-                              ),
-                            ),
-                          ],
-                        )
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const order()));
+                      },
                     ),
                   ],
                 ),
@@ -218,169 +146,284 @@ class _dashboardState extends State<dashboard> {
                 Row(
                   children: [
                     const SizedBox(width: 20,),
-                    Container(
-                      width: 180,
-                      height: 200,
-                      decoration: BoxDecoration(
-                        color: Colors.lightGreenAccent,
-                        border: Border.all(
-                          color: Colors.black,
+                    InkWell(
+                      child: Container(
+                        width: 180,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          color: Colors.lightGreenAccent,
+                          border: Border.all(
+                            color: Colors.black,
+                          ),
+                          borderRadius: const BorderRadius.all(Radius.circular(20)),
                         ),
-                        borderRadius: const BorderRadius.all(Radius.circular(20)),
-                      ),
-                        child: Column(
-                          children: const[
-                            CircleAvatar(
-                              radius: 60,
-                              backgroundColor: Colors.white,
-                              foregroundImage: AssetImage("assets/antibiotic.jpg"),
-                            ),
-                            SizedBox(height: 10,),
-                            Text("Antibiotic",
-                              style: TextStyle(
-                                  fontSize: 23,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
-                                  shadows: [BoxShadow(
-                                    color: Colors.white,
-                                    offset: Offset(2, 2),
-                                    blurRadius: 2,
-                                  ),
-                                    BoxShadow(
-                                      color: Colors.black45,
-                                      offset: Offset(5, 9),
-                                      blurRadius: 12,
-                                    ),
-                                  ]
+                          child: Column(
+                            children: const[
+                              CircleAvatar(
+                                radius: 60,
+                                backgroundColor: Colors.white,
+                                foregroundImage: AssetImage("assets/child.jpg"),
                               ),
-                            ),
-                          ],
-                        )
+                              SizedBox(height: 10,),
+                              Text("Child",
+                                style: TextStyle(
+                                    fontSize: 23,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black,
+                                    shadows: [BoxShadow(
+                                      color: Colors.white,
+                                      offset: Offset(2, 2),
+                                      blurRadius: 2,
+                                    ),
+                                      BoxShadow(
+                                        color: Colors.black45,
+                                        offset: Offset(5, 9),
+                                        blurRadius: 12,
+                                      ),
+                                    ]
+                                ),
+                              ),
+                            ],
+                          )
+                      ),
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const order()));
+                      },
                     ),
                     const SizedBox(width: 20,),
-                    Container(
-                      width: 180,
-                      height: 200,
-                      decoration: BoxDecoration(
-                        color: Colors.lightGreenAccent,
-                        border: Border.all(
-                          color: Colors.black,
+                    InkWell(
+                      child: Container(
+                        width: 180,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          color: Colors.lightGreenAccent,
+                          border: Border.all(
+                            color: Colors.black,
+                          ),
+                          borderRadius: const BorderRadius.all(Radius.circular(20)),
                         ),
-                        borderRadius: const BorderRadius.all(Radius.circular(20)),
-                      ),
-                        child: Column(
-                          children: const[
-                            CircleAvatar(
-                              radius: 60,
-                              backgroundColor: Colors.white,
-                              foregroundImage: AssetImage("assets/2t.jpg"),
-                            ),
-                            SizedBox(height: 10,),
-                            Text("Pain Relievers",
-                              style: TextStyle(
-                                  fontSize: 23,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
-                                  shadows: [BoxShadow(
-                                    color: Colors.white,
-                                    offset: Offset(2, 2),
-                                    blurRadius: 2,
-                                  ),
-                                    BoxShadow(
-                                      color: Colors.black45,
-                                      offset: Offset(5, 9),
-                                      blurRadius: 12,
-                                    ),
-                                  ]
+                          child: Column(
+                            children: const[
+                              CircleAvatar(
+                                radius: 60,
+                                backgroundColor: Colors.white,
+                                foregroundImage: AssetImage("assets/syrup.jpg"),
                               ),
-                            ),
-                          ],
-                        )
+                              SizedBox(height: 10,),
+                              Text("Syrups",
+                                style: TextStyle(
+                                    fontSize: 23,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black,
+                                    shadows: [BoxShadow(
+                                      color: Colors.white,
+                                      offset: Offset(2, 2),
+                                      blurRadius: 2,
+                                    ),
+                                      BoxShadow(
+                                        color: Colors.black45,
+                                        offset: Offset(5, 9),
+                                        blurRadius: 12,
+                                      ),
+                                    ]
+                                ),
+                              ),
+                            ],
+                          )
+                      ),
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const order()));
+                      },
                     ),
                   ],
                 ),
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
                 Row(
                   children: [
                     const SizedBox(width: 20,),
-                    Container(
-                      width: 180,
-                      height: 200,
-                      decoration: BoxDecoration(
-                        color: Colors.lightGreenAccent,
-                        border: Border.all(
-                          color: Colors.black,
+                    InkWell(
+                      child: Container(
+                        width: 180,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          color: Colors.lightGreenAccent,
+                          border: Border.all(
+                            color: Colors.black,
+                          ),
+                          borderRadius: const BorderRadius.all(Radius.circular(20)),
                         ),
-                        borderRadius: const BorderRadius.all(Radius.circular(20)),
-                      ),
-                        child: Column(
-                          children: const[
-                            CircleAvatar(
-                              radius: 60,
-                              backgroundColor: Colors.white,
-                              foregroundImage: AssetImage("assets/doctor.jpg"),
-                            ),
-                            SizedBox(height: 10,),
-                            Text("Channeling",
-                              style: TextStyle(
-                                  fontSize: 23,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
-                                  shadows: [BoxShadow(
-                                    color: Colors.white,
-                                    offset: Offset(2, 2),
-                                    blurRadius: 2,
-                                  ),
-                                    BoxShadow(
-                                      color: Colors.black45,
-                                      offset: Offset(5, 9),
-                                      blurRadius: 12,
-                                    ),
-                                  ]
+                          child: Column(
+                            children: const[
+                              CircleAvatar(
+                                radius: 60,
+                                backgroundColor: Colors.white,
+                                foregroundImage: AssetImage("assets/antibiotic.jpg"),
                               ),
-                            ),
-                          ],
-                        )
+                              SizedBox(height: 10,),
+                              Text("Antibiotic",
+                                style: TextStyle(
+                                    fontSize: 23,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black,
+                                    shadows: [BoxShadow(
+                                      color: Colors.white,
+                                      offset: Offset(2, 2),
+                                      blurRadius: 2,
+                                    ),
+                                      BoxShadow(
+                                        color: Colors.black45,
+                                        offset: Offset(5, 9),
+                                        blurRadius: 12,
+                                      ),
+                                    ]
+                                ),
+                              ),
+                            ],
+                          )
+                      ),
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const order()));
+                      },
                     ),
                     const SizedBox(width: 20,),
-                    Container(
-                      width: 180,
-                      height: 200,
-                      decoration: BoxDecoration(
-                        color: Colors.lightGreenAccent,
-                        border: Border.all(
-                          color: Colors.black,
+                    InkWell(
+                      child: Container(
+                        width: 180,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          color: Colors.lightGreenAccent,
+                          border: Border.all(
+                            color: Colors.black,
+                          ),
+                          borderRadius: const BorderRadius.all(Radius.circular(20)),
                         ),
-                        borderRadius: const BorderRadius.all(Radius.circular(20)),
-                      ),
-                        child: Column(
-                          children: const[
-                            CircleAvatar(
-                              radius: 60,
-                              backgroundColor: Colors.white,
-                              foregroundImage: AssetImage("assets/emmergency.jpg"),
-                            ),
-                            SizedBox(height: 10,),
-                            Text("Emergency",
-                              style: TextStyle(
-                                  fontSize: 23,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
-                                  shadows: [BoxShadow(
-                                    color: Colors.white,
-                                    offset: Offset(2, 2),
-                                    blurRadius: 2,
-                                  ),
-                                    BoxShadow(
-                                      color: Colors.black45,
-                                      offset: Offset(5, 9),
-                                      blurRadius: 12,
-                                    ),
-                                  ]
+                          child: Column(
+                            children: const[
+                              CircleAvatar(
+                                radius: 60,
+                                backgroundColor: Colors.white,
+                                foregroundImage: AssetImage("assets/2t.jpg"),
                               ),
-                            ),
-                          ],
-                        )
+                              SizedBox(height: 10,),
+                              Text("Pain Relievers",
+                                style: TextStyle(
+                                    fontSize: 23,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black,
+                                    shadows: [BoxShadow(
+                                      color: Colors.white,
+                                      offset: Offset(2, 2),
+                                      blurRadius: 2,
+                                    ),
+                                      BoxShadow(
+                                        color: Colors.black45,
+                                        offset: Offset(5, 9),
+                                        blurRadius: 12,
+                                      ),
+                                    ]
+                                ),
+                              ),
+                            ],
+                          )
+                      ),
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const order()));
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20,),
+                Row(
+                  children: [
+                    const SizedBox(width: 20,),
+                    InkWell(
+                      child: Container(
+                        width: 180,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          color: Colors.lightGreenAccent,
+                          border: Border.all(
+                            color: Colors.black,
+                          ),
+                          borderRadius: const BorderRadius.all(Radius.circular(20)),
+                        ),
+                          child: Column(
+                            children: const[
+                              CircleAvatar(
+                                radius: 60,
+                                backgroundColor: Colors.white,
+                                foregroundImage: AssetImage("assets/doctor.jpg"),
+                              ),
+                              SizedBox(height: 10,),
+                              Text("Channeling",
+                                style: TextStyle(
+                                    fontSize: 23,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black,
+                                    shadows: [BoxShadow(
+                                      color: Colors.white,
+                                      offset: Offset(2, 2),
+                                      blurRadius: 2,
+                                    ),
+                                      BoxShadow(
+                                        color: Colors.black45,
+                                        offset: Offset(5, 9),
+                                        blurRadius: 12,
+                                      ),
+                                    ]
+                                ),
+                              ),
+                            ],
+                          )
+                      ),
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const chan()));
+                      },
+                    ),
+                    const SizedBox(width: 20,),
+                    InkWell(
+                      child: Container(
+                        width: 180,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          color: Colors.lightGreenAccent,
+                          border: Border.all(
+                            color: Colors.black,
+                          ),
+                          borderRadius: const BorderRadius.all(Radius.circular(20)),
+                        ),
+                          child: Column(
+                            children: const[
+                              CircleAvatar(
+                                radius: 60,
+                                backgroundColor: Colors.white,
+                                foregroundImage: AssetImage("assets/emmergency.jpg"),
+                              ),
+                              SizedBox(height: 10,),
+                              Text("Emergency",
+                                style: TextStyle(
+                                    fontSize: 23,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black,
+                                    shadows: [BoxShadow(
+                                      color: Colors.white,
+                                      offset: Offset(2, 2),
+                                      blurRadius: 2,
+                                    ),
+                                      BoxShadow(
+                                        color: Colors.black45,
+                                        offset: Offset(5, 9),
+                                        blurRadius: 12,
+                                      ),
+                                    ]
+                                ),
+                              ),
+                            ],
+                          )
+                      ),
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const emergency()));
+                      },
                     ),
                   ],
                 ),
